@@ -1,0 +1,8 @@
+{
+  "name": "Enterprise",
+  "version": "0.0.1",
+  "private": "true",
+  "dependencies": {
+    "express": "3.0.0alpha4"
+  }
+}
