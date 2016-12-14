@@ -25,7 +25,7 @@ cities = ["Rio Cuarto", "Córdoba", "Buenos Aires", "Rosario", "Rio de Janeiro",
 
 app.get('/', function (req, res) {
   res.render('index',
-  { title : 'Home' , cities : cities}
+  { title : 'Home', cities: cities}
   )
 })
 app.listen(3000)

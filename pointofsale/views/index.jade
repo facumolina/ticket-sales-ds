@@ -2,12 +2,12 @@ extend layout
 block content
   script(rel='js',type='text/javascript',src='/js/search.js')
   t2 Origin: &nbsp;
-  select
+  select#origin
     each city, i in cities
       option(value=i) #{city} 
   &nbsp; &nbsp;
   t2 Destiny: &nbsp;
-  select
+  select#destiny
     each city, i in cities
       option(value=i) #{city}
   &nbsp;
