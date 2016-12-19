@@ -21,7 +21,7 @@ app.use(stylus.middleware(
 ))
 app.use(express.static(__dirname + '/public'))
 
-cities = ["Rio Cuarto", "Córdoba", "Buenos Aires", "Rosario", "Rio de Janeiro", "Brasilia","New York", "Los Angeles"]
+cities = ["Río Cuarto", "Córdoba", "Buenos Aires", "Rosario", "Rio de Janeiro", "Brasilia","New York", "Los Angeles"]
 
 app.get('/', function (req, res) {
   res.render('index',

@@ -1,5 +1,6 @@
 extend layout
 block content
+  script(rel='js',type='text/javascript',src='/js/graphlib.min.js')
   script(rel='js',type='text/javascript',src='/js/search.js')
   t2 Origin: &nbsp;
   select#origin
@@ -12,4 +13,7 @@ block content
       option(value=i) #{city}
   &nbsp;
   button(onclick="search()") Search
+  br
+  br
+  #travelsTable
 block sidebar
