@@ -1,0 +1,50 @@
+[{
+  "originCity": "Río Cuarto",
+  "destinyCity": "Córdoba",
+  "price": 1500,
+  "places": 200,
+  "reservedPlaces": 0,
+  "id": 1
+},{
+  "originCity": "Córdoba",
+  "destinyCity": "Río Cuarto",
+  "price": 1500,
+  "places": 200,
+  "reservedPlaces": 0,
+  "id": 2
+},{
+  "originCity": "Córdoba",
+  "destinyCity": "Buenos Aires",
+  "price": 1500,
+  "places": 200,
+  "reservedPlaces": 0,
+  "id": 3
+},{
+  "originCity": "Buenos Aires",
+  "destinyCity": "Córdoba",
+  "price": 1500,
+  "places": 200,
+  "reservedPlaces": 0,
+  "id": 4
+},{
+  "originCity": "Rosario",
+  "destinyCity": "Buenos Aires",
+  "price": 1500,
+  "places": 200,
+  "reservedPlaces": 0,
+  "id": 5
+},{
+  "originCity": "Buenos Aires",
+  "destinyCity": "Rosario",
+  "price": 1500,
+  "places": 200,
+  "reservedPlaces": 0,
+  "id": 6
+}, {
+  "originCity": "Córdoba",
+  "destinyCity": "Rosario",
+  "price": 1500,
+  "places": 200,
+  "reservedPlaces": 0,
+  "id": 7
+}]

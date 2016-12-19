@@ -9,10 +9,23 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.get('/listUsers', function (req, res) {
-   fs.readFile( __dirname + "/data/" + "users.json", 'utf8', function (err, data) {
+app.get('/listTravels', function (req, res) {
+   fs.readFile( __dirname + "/data/" + "travels.json", 'utf8', function (err, data) {
        console.log( data );
        res.end( data );
+   });
+})
+
+app.post('/reservation/:travelId', function (req, res) {
+   // Get the travel, and make the reservation if it can be done.
+   fs.readFile( __dirname + "/data/" + "travels.json", 'utf8', function (err, data) {
+       data = JSON.parse( data );
+       var selectedTravel = data["travel"+req.params.travelId];
+       console.log(req.params);
+       selectedTravel.reservedPlaces += 1;
+       data["travel"+req.params.travelId] = selectedTravel;
+       console.log(data);
+       res.end( "ReservationOK");
    });
 })
 
