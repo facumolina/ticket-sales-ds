@@ -2,6 +2,8 @@ extend layout
 block content
   script(rel='js',type='text/javascript',src='/js/graphlib.min.js')
   script(rel='js',type='text/javascript',src='/js/search.js')
+  script(rel='js',type='text/javascript',src='/js/graph-operations.js')
+  script(rel='js',type='text/javascript',src='/js/view-operations.js')
   t2 Origin: &nbsp;
   select#origin
     each city, i in cities
@@ -12,7 +14,7 @@ block content
     each city, i in cities
       option(value=i) #{city}
   &nbsp;
-  button(onclick="search()") Search
+  button(onclick="searchTravels()") Search
   br
   br
   #travelsTable
