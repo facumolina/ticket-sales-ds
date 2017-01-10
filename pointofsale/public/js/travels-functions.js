@@ -3,6 +3,9 @@ var enterpriseServers = ["http://localhost:8081","http://localhost:8082"];
 var travels = new graphlib.Graph(); // creates a graph
 var paths = [];
 
+// Timestamp for event synchronization
+var time_stamp=0;
+
 /**
  * searchTravels(): this function call to all the enterprise servers seaching for travels. And then each 
  * time that get the response of a server it tries to calculate if there is a possible way from the origin 
@@ -75,7 +78,9 @@ function reserveTravels(path){
         console.log(this.responseText);
       }
     };
-    xhttp.open("POST", travelInPath.providerUrl +"/reservation/"+travelInPath.id, true);
-    xhttp.send();
+    xhttp.open("POST", travelInPath.providerUrl +"/reservation", true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    time_stamp++;
+    xhttp.send(JSON.stringify({travelId:travelInPath.id, time_stamp:time_stamp}));
   }
 }

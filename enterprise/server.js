@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var fs = require("fs");
 
+var bodyParser = require('body-parser')
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -16,12 +18,15 @@ app.get('/listTravels', function (req, res) {
    });
 })
 
-app.post('/reservation/:travelId', function (req, res) {
+app.post('/reservation', function (req, res) {
    // Get the travel, and make the reservation if it can be done.
+   console.log("STARTING RESERVATION");
+   console.log(req.params);
+   console.log(req.body);
    fs.readFile( __dirname + "/data/" + "travels.json", 'utf8', function (err, data) {
        console.log("START RESERVATION");
        var travels = JSON.parse( data );
-       var travelId = req.params.travelId;
+       var travelId = req.body.travelId;
        var reserved = reservationCanBePerformed(travels[travelId-1]); 
        if (reserved) {
         res.end("ReservationOK");
