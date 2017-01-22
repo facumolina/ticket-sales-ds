@@ -7,7 +7,7 @@ var paths = [];
 var time_stamp=0;
 
 /**
- * searchTravels(): this function call to all the enterprise servers seaching for travels. And then each 
+ * searchTravels(): this function call to all the enterprise servers searching for travels. And then each 
  * time that get the response of a server it tries to calculate if there is a possible way from the origin 
  * to the destiny.
  */

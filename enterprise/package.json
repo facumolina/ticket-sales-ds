@@ -4,6 +4,7 @@
   "private": "true",
   "dependencies": {
     "body-parser": "^1.15.2",
-    "express": "3.0.0alpha4"
+    "express": "3.0.0alpha4",
+    "priorityqueuejs": "^1.0.0"
   }
 }
