@@ -6,11 +6,13 @@ var bodyParser = require('body-parser');
 // Include priority queue file.
 var PriorityQueue = require('priorityqueuejs');
 
-var queue = new PriorityQueue(function(a, b) {
-  return a.cash - b.cash;
+var requestsQueue = new PriorityQueue(function(a, b) {
+  return b.time_stamp - a.time_stamp;
 });
 
-queue.enq({ cash: 250, name: 'Valentina' });
+requestsQueue.enq({ time_stamp: 250, name: 'req1' });
+requestsQueue.enq({ time_stamp: 251, name: 'req2' });
+requestsQueue.enq({ time_stamp: 254, name: 'req3' });
 
 // Timestamp for event synchronization
 var time_stamp=0;
@@ -34,6 +36,11 @@ app.get('/listTravels', function (req, res) {
 
 // Reserve a travel
 app.post('/reservation', function (req, res) {
+   // Enqueue the reservation
+   requestsQueue.enq(buildReservationRequest(req,res));
+   console.log('Reservation enqueued');
+   console.log(requestsQueue);
+
    // Get the params
    var travelId = req.body.travelId;
    var receivedtimestamp = req.body.time_stamp;
@@ -56,6 +63,14 @@ var server = app.listen(8081, function () {
   var host = server.address().address
   var port = server.address().port
   console.log("Example app listening at http://%s:%s", host, port)
+
+  //while(true) {
+  //  if (requestsQueue.size() > 0) {
+      // There is at least one request to be processed.
+  //    console.log('Processing request');
+  //    console.log(requestsQueue.deq());
+  //  }
+  //}
 });
 
 /**
@@ -66,4 +81,18 @@ function reservePlace(travel){
   // SAVE THE RESERVATION WITH THE TIMESTAMP.
   console.log(travel);
   return (travel.places-travel.reservedPlaces)>0;
+}
+
+/**
+ * buildReservation(req,res): build a reservation from the given request and response
+ * to be enqueued in the requests queue.
+ */
+function buildReservationRequest(req,res){
+  var request = new JSONObject();
+  request.req = req;
+  request.res = res;
+  request.type = 'RESERVATION';
+  console.log('Reservation built');
+  console.log(request);
+  return request;  
 }
