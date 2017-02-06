@@ -62,10 +62,10 @@ function reservePlace(travel){
   	reserve.status = PENDING_STATUS;
   	var reserveIndex = allReserves.push(reserve)-1;
   	reservationCancellation(travel,reserveIndex,reserve.id);
-  	console.log('[LOG] - Reservation '+ reserve.id +' performed for travel '+travel.id+'. Total reserved places: '+travel.reservedPlaces);
+  	console.log('[LOG] - Reservation '+ reserve.id +' performed for travel '+travel.id+'. Total reserved places: '+travel.reservedPlaces+'. Total available places: '+(travel.places-travel.reservedPlaces));
   } else {
   	reserve.status = FAILED_STATUS;
-  	console.log('[LOG] - Reservation '+ reserve.id +' failed for travel '+travel.id+'. Total reserved places: '+travel.reservedPlaces);
+  	console.log('[LOG] - Reservation '+ reserve.id +' failed for travel '+travel.id+'. Total reserved places: '+travel.reservedPlaces+'. Total available places: '+(travel.places-travel.reservedPlaces));
   }
   return reserve;
 }
@@ -79,7 +79,7 @@ function reservationCancellation(travel,reserveIndex,reserveId){
 		if (reserve.id === reserveId && reserve.status === PENDING_STATUS) {
 			travel.reservedPlaces--;
 			reserve.status = CANCELLED_STATUS;
-			console.log('[LOG] - Reservation '+ reserve.id +' cancelled for travel '+travel.id+'. Total reserved places: '+travel.reservedPlaces);}
+			console.log('[LOG] - Reservation '+ reserve.id +' cancelled for travel '+travel.id+'. Total reserved places: '+travel.reservedPlaces+'. Total available places: '+(travel.places-travel.reservedPlaces));}
 		}
 		,max_reservation_time * 1000);
 } 

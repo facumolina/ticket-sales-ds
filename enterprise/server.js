@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var PriorityQueue = require('priorityqueuejs');
 var reservation = require('./reservation');
 var confirmation = require('./confirmation');
+var cancellation = require('./cancellation');
 
 var travels;  // All the travels made by the company.
 var requestsQueue; // Queue for all the requests.
@@ -37,6 +38,14 @@ app.post('/confirmation', function (req, res) {
   console.log('[LOG] - Confirmation received for travel '+req.body.travelId);
   time_stamp = Math.max(req.body.time_stamp, time_stamp) + 1;
   requestsQueue.enq(confirmation.buildConfirmationRequest(req,res,time_stamp));
+  processRequests();
+})
+
+// Cancel a travel
+app.post('/cancellation', function (req, res) {
+  console.log('[LOG] - Cancellation received for travel '+req.body.travelId);
+  time_stamp = Math.max(req.body.time_stamp, time_stamp) + 1;
+  requestsQueue.enq(cancellation.buildCancellationRequest(req,res,time_stamp));
   processRequests();
 })
 
@@ -76,6 +85,9 @@ function processRequests() {
     }
     if (request.type === 'CONFIRMATION') {
       confirmation.processConfirmation(travels,request);
+    }
+    if (request.type === 'CANCELLATION') {
+      cancellation.processCancellation(travels,request);
     }
   } 
 }

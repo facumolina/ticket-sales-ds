@@ -29,12 +29,18 @@ module.exports = {
 
 	 	// Get reserve
 	 	var reserve = getCorrespondingReserve(confirmation.reserve.id);
-	  reserve.status = 'CONFIRMED';
-
-	 	console.log('[LOG] - Confirming reservation '+ reserve.id +' for travel '+travelId+' in time_stamp '+confirmation.time_stamp+'. Total available places: '+(travel.places-travel.reservedPlaces));
-
-	 	// Confirm the place.
-	 	confirmation.res.end("CONFIRMATION_SUCCESS");
+	  
+	 	if (reserve.status === 'WAITING_CONFIRMATION') {
+	 		reserve.status = 'CONFIRMED';
+			console.log('[LOG] - Confirming reservation '+ reserve.id +' for travel '+travelId+' in time_stamp '+confirmation.time_stamp+'. Total available places: '+(travel.places-travel.reservedPlaces));
+			
+			// Confirm the place.
+	 		confirmation.res.end("CONFIRMATION_SUCCESS");
+	 	} else {
+	 		console.log('[LOG] - Reservation '+ reserve.id +' for travel '+travelId+' in time_stamp '+confirmation.time_stamp+' can not be confirmed. Total available places: '+(travel.places-travel.reservedPlaces));
+	 		confirmation.res.end("CONFIRMATION_ERROR");	
+	 	}
+	  
 	}
 };
 

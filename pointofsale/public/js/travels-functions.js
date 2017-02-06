@@ -17,8 +17,6 @@ function searchTravels() {
   
   var originCity = originSelect.options[originSelect.value].text;
   var destinyCity = destinySelect.options[destinySelect.value].text;
-  
-  console.log('Searching from '+originCity+' to '+destinyCity);
 
   for (var i=0; i < enterpriseServers.length; i++) {
     var serverUrl = enterpriseServers[i];

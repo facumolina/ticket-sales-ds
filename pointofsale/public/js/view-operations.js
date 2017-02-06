@@ -3,10 +3,7 @@
  */
 function fillTableWithAllTravels(paths){
   var tableDiv = document.getElementById("travelsTable");
-  while(tableDiv.firstChild){
-    tableDiv.removeChild(tableDiv.firstChild);
-  }
-  tableDiv.style.width = "500px";
+  cleanTable();
 
   for (var i=0; i<paths.length; i++){
     var pathTr = document.createElement('TR');
@@ -54,10 +51,7 @@ function fillTableWithAllTravels(paths){
     buttonConfirm.onclick = function(){
       reserveTravels(this.travel);
     };
-    //var inputAmountToReserve = document.createElement('INPUT');
-    //inputAmountToReserve.style.float='right';
     tableDiv.appendChild(buttonConfirm);
-    //tableDiv.appendChild(inputAmountToReserve);
     tableDiv.appendChild(document.createElement('BR'));
     tableDiv.appendChild(document.createElement('BR'));
   }
@@ -70,13 +64,8 @@ function fillTableWithAllTravels(paths){
  */
 function fillTableWithOneTravel(path,reserves) {
   console.log('[LOG] - All the travels has been reserved');
-  console.log(path);
-
   var tableDiv = document.getElementById("travelsTable");
-  while(tableDiv.firstChild){
-    tableDiv.removeChild(tableDiv.firstChild);
-  }
-  tableDiv.style.width = "500px";
+  cleanTable();
 
   var pathTr = document.createElement('TR');
   
@@ -128,7 +117,7 @@ function fillTableWithOneTravel(path,reserves) {
   buttonCancel.style.float='left';
   buttonCancel.travel = path;
   buttonCancel.onclick = function(){
-    reserveTravels(this.travel);
+    cleanTable();
   };
 
   tableDiv.appendChild(document.createElement('BR'));
@@ -138,4 +127,85 @@ function fillTableWithOneTravel(path,reserves) {
   tableDiv.appendChild(document.createElement('BR'));
   tableDiv.appendChild(document.createElement('BR'));
 
+}
+
+/**
+ * fillTableWithFinalStep(): fill the table with the final step.
+ */
+function fillTableWithFinalStep(path,reserves) {
+  console.log('[LOG] - All the travels has been reserved');
+  var tableDiv = document.getElementById("travelsTable");
+  cleanTable();
+
+  var pathTr = document.createElement('TR');
+  
+  var pathTable = document.createElement('TABLE');
+  pathTable.border='1';
+    
+  var pathTableCaption = document.createElement('CAPTION');
+  pathTableCaption.appendChild(document.createTextNode("Travel confirmed"));
+  pathTable.appendChild(pathTableCaption);
+
+  var pathTableBody = document.createElement('TBODY');
+  pathTable.appendChild(pathTableBody);
+
+  var pathTd = document.createElement('TD');
+  pathTd.width='1000';
+  pathTd.appendChild(pathTable);
+
+  for (var j=0; j<path.length-1; j++){
+
+    var travelInPath = travels.edge({ v: path[j], w: path[j+1] });
+    var travelTr = document.createElement('TR');
+    pathTableBody.appendChild(travelTr);
+
+    var originTd = document.createElement('TD');
+    var destinyTd = document.createElement('TD');
+    originTd.style.paddingTop='10px';
+    originTd.width='100';
+    originTd.appendChild(document.createTextNode(path[j]));
+    destinyTd.style.paddingTop='10px';
+    destinyTd.width='100';
+    destinyTd.appendChild(document.createTextNode(path[j+1]));
+    travelTr.appendChild(originTd);
+    travelTr.appendChild(destinyTd);
+  }
+
+  pathTr.appendChild(pathTd);
+  tableDiv.appendChild(pathTable);
+  var buttonConfirm = document.createElement('BUTTON');
+  buttonConfirm.appendChild(document.createTextNode('Finish'));
+  buttonConfirm.style.float='right';
+  buttonConfirm.travel = path;
+  buttonConfirm.onclick = function(){
+    cleanTable();
+  };
+
+  var buttonCancel = document.createElement('BUTTON');
+  buttonCancel.appendChild(document.createTextNode('Cancel'));
+  buttonCancel.style.float='left';
+  buttonCancel.travel = path;
+  buttonCancel.reserves = reserves;
+  buttonCancel.onclick = function(){
+    cancelConfirmation(this.travel,this.reserves);
+  };
+
+  tableDiv.appendChild(document.createElement('BR'));
+  tableDiv.appendChild(document.createElement('BR'));
+  tableDiv.appendChild(buttonConfirm);
+  tableDiv.appendChild(buttonCancel);
+  tableDiv.appendChild(document.createElement('BR'));
+  tableDiv.appendChild(document.createElement('BR'));
+
+}
+
+/**
+ * cleanTable(): clean the table.
+ */
+function cleanTable() {
+  var tableDiv = document.getElementById("travelsTable");
+  while(tableDiv.firstChild){
+    tableDiv.removeChild(tableDiv.firstChild);
+  }
+  tableDiv.style.width = "500px";
 }
