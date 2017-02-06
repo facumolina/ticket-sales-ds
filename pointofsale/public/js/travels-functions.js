@@ -45,7 +45,7 @@ function findTravels(originCity,destinyCity,jsonTravels,serverUrl) {
   saveTravels(jsonTravels,serverUrl);
   paths = [];
   findAllPaths(travels,originCity,destinyCity,[originCity]);
-  fillTravelsTable(paths);
+  fillTableWithAllTravels(paths);
 }
 
 /**
@@ -61,26 +61,5 @@ function saveTravels(jsonTravels,serverUrl) {
     if (!travels.hasNode(travel.destinyCity))
       travels.setNode(travel.destinyCity);
     travels.setEdge(travel.originCity,travel.destinyCity,travel);
-  }
-}
-
-/**
- * reserveTravels(path): reserve the travels in the given path.
- */
-function reserveTravels(path){
-  for(var i=0; i < path.length-1; i++) {
-    var travelInPath = travels.edge({ v: path[i], w: path[i+1] });
-    
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        console.log("RESERVATION RESPONSE");
-        console.log(this.responseText);
-      }
-    };
-    xhttp.open("POST", travelInPath.providerUrl +"/reservation", true);
-    xhttp.setRequestHeader("Content-Type", "application/json");
-    time_stamp++;
-    xhttp.send(JSON.stringify({travelId:travelInPath.id, time_stamp:time_stamp}));
   }
 }
