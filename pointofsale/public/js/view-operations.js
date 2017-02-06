@@ -68,7 +68,7 @@ function fillTableWithAllTravels(paths){
  * fillTableWithOneTravel(): fill the table with the travel corresponding to the path 
  * for confirmation.
  */
-function fillTableWithOneTravel(path) {
+function fillTableWithOneTravel(path,reserves) {
   console.log('[LOG] - All the travels has been reserved');
   console.log(path);
 
@@ -118,8 +118,9 @@ function fillTableWithOneTravel(path) {
   buttonConfirm.appendChild(document.createTextNode('Confirm'));
   buttonConfirm.style.float='right';
   buttonConfirm.travel = path;
+  buttonConfirm.reserves = reserves;
   buttonConfirm.onclick = function(){
-    confirmTravels(this.travel);
+    confirmTravels(this.travel,this.reserves);
   };
 
   var buttonCancel = document.createElement('BUTTON');

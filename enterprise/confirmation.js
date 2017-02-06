@@ -1,5 +1,7 @@
 // This module contains all the confirmation functionality.
 
+var reservation = require('./reservation');
+
 module.exports = {
 
 	/**
@@ -9,6 +11,7 @@ module.exports = {
 	buildConfirmationRequest: function(req,res,time_stamp){
 		var confirmation = {};
 		confirmation.travelId = req.body.travelId;
+		confirmation.reserve = req.body.reserve;
 		confirmation.time_stamp = time_stamp;
 		confirmation.res = res;
 		confirmation.type = 'CONFIRMATION';
@@ -24,9 +27,25 @@ module.exports = {
 	 	var travelId = confirmation.travelId;
 	 	var travel = travels[travelId-1];
 
-	 	console.log('[LOG] - Processing confirmation for travel '+travelId+' in time_stamp '+confirmation.time_stamp);
+	 	// Get reserve
+	 	var reserve = getCorrespondingReserve(confirmation.reserve.id);
+	  reserve.status = 'CONFIRMED';
+
+	 	console.log('[LOG] - Confirming reservation '+ reserve.id +' for travel '+travelId+' in time_stamp '+confirmation.time_stamp+'. Total available places: '+(travel.places-travel.reservedPlaces));
 
 	 	// Confirm the place.
 	 	confirmation.res.end("CONFIRMATION_SUCCESS");
 	}
 };
+
+/**
+ * getCorrespondingReserve(reserveId): returns the reserve with the given id
+ */
+function getCorrespondingReserve(reserveId) {
+	var reserves = reservation.getReserves();
+	for (var i = 0; i < reserves.length; i ++) {
+		if (reserves[i].id === reserveId) {
+			return reserves[i];
+		}
+	}
+}
