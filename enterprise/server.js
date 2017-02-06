@@ -25,7 +25,7 @@ app.get('/listTravels', function (req, res) {
 
 // Reserve a travel
 app.post('/reservation', function (req, res) {
-  console.log('[LOG] - Reservation received for travel '+reservation.travelId);
+  console.log('[LOG] - Reservation received for travel '+req.body.travelId);
   time_stamp = Math.max(req.body.time_stamp, time_stamp) + 1;
   requestsQueue.enq(reservation.buildReservationRequest(req,res,time_stamp));
   processRequests();

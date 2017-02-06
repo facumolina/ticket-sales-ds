@@ -26,7 +26,7 @@ module.exports = {
 	 	var travelId = reservation.travelId;
 	 	var travel = travels[travelId-1];
 
-	 	console.log('[LOG]: Processing reservation for travel: '+travelId+' in time_stamp '+reservation.time_stamp);
+	 	console.log('[LOG] - Processing reservation for travel '+travelId+' in time_stamp '+reservation.time_stamp);
 
 	 	// Reserve the place
 	 	var reserved = reservePlace(travel); 
@@ -46,10 +46,10 @@ module.exports = {
 function reservePlace(travel){
   if (travel.places-travel.reservedPlaces>0) {
   	travel.reservedPlaces++;
-  	console.log('[LOG]: Reservation performed for travel: '+travel.id+'. Total reserved places: '+travel.reservedPlaces);
+  	console.log('[LOG] - Reservation performed for travel '+travel.id+'. Total reserved places: '+travel.reservedPlaces);
   	return true;
   } else {
-  	console.log('[LOG]: Reservation failed for travel: '+travel.id+'. Total reserved places: '+travel.reservedPlaces);
+  	console.log('[LOG] - Reservation failed for travel '+travel.id+'. Total reserved places: '+travel.reservedPlaces);
   	return false;
   }
 }
@@ -58,5 +58,5 @@ function reservePlace(travel){
  * reservationCancellation(travel): cancell a reservation in the given travel after the defined time.
  */
 function reservationCancellation(travel){
-	setTimeout(function(){travel.reservedPlaces--;console.log('[LOG]: Reservation cancelled for travel : '+travel.id+'. Total reserved places: '+travel.reservedPlaces);},max_reservation_time * 1000);
+	setTimeout(function(){travel.reservedPlaces--;console.log('[LOG] - Reservation cancelled for travel : '+travel.id+'. Total reserved places: '+travel.reservedPlaces);},max_reservation_time * 1000);
 } 
