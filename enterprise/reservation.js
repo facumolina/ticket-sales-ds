@@ -5,7 +5,7 @@ var max_reservation_time = 10; // Max reservation time in seconds.
 module.exports = {
 	
 	/**
-	 * buildReservation(req,res,time_stamp): build a reservation from the given request and response
+	 * buildReservationRequest(req,res,time_stamp): build a reservation from the given request and response
 	 * to be enqueued in the requests queue.
 	 */
 	buildReservationRequest: function(req,res,time_stamp){
@@ -32,9 +32,9 @@ module.exports = {
 	 	var reserved = reservePlace(travel); 
 	 	if (reserved) {
 	 		reservationCancellation(travel);
-	 		reservation.res.end("ReservationOK");
+	 		reservation.res.end("RESERVATION_SUCCESS");
 	 	} else {
-	 		reservation.res.end("ReservationFAIL");
+	 		reservation.res.end("RESERVATION_FAILURE");
 	 	}
 	}
 };
@@ -58,5 +58,5 @@ function reservePlace(travel){
  * reservationCancellation(travel): cancell a reservation in the given travel after the defined time.
  */
 function reservationCancellation(travel){
-	setTimeout(function(){travel.reservedPlaces--;console.log('[LOG] - Reservation cancelled for travel : '+travel.id+'. Total reserved places: '+travel.reservedPlaces);},max_reservation_time * 1000);
+	setTimeout(function(){travel.reservedPlaces--;console.log('[LOG] - Reservation cancelled for travel '+travel.id+'. Total reserved places: '+travel.reservedPlaces);},max_reservation_time * 1000);
 } 

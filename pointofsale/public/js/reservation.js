@@ -5,7 +5,8 @@ function reserveTravels(path){
   var totalTravels = path.length-1;
   var reservedTravels = 0;
   var travelPath = path;
-  
+  var reservationFailed = false;
+
   for(var i=0; i < totalTravels; i++) {
     var travelInPath = travels.edge({ v: path[i], w: path[i+1] });
     console.log("[LOG] - Sending reservation request for travel");
@@ -16,13 +17,15 @@ function reserveTravels(path){
         console.log(this.responseText);
         if (this.responseText === 'RESERVATION_SUCCESS') {
           reservedTravels++;
-          console.log("[LOG] - Travel reserved successfuly");
+          console.log("[LOG] - Travel reserved successfully");
           if (reservedTravels === totalTravels) {
             fillTableWithOneTravel(travelPath);
           }
         }
-        if (this.responseText === 'RESERVATION_FAILURE') {
+        if (this.responseText === 'RESERVATION_FAILURE' && !reservationFailed) {
+          reservationFailed = true;
           console.log("[LOG] - Travel reservation has failed");
+          alert('One reservation has failed. The operation has been cancelled.');
         }
       }
     };
