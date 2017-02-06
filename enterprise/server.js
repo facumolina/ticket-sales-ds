@@ -4,6 +4,7 @@ var fs = require("fs");
 var bodyParser = require('body-parser');
 var PriorityQueue = require('priorityqueuejs');
 var reservation = require('./reservation');
+var confirmation = require('./confirmation');
 
 var travels;  // All the travels made by the company.
 var requestsQueue; // Queue for all the requests.
@@ -28,6 +29,14 @@ app.post('/reservation', function (req, res) {
   console.log('[LOG] - Reservation received for travel '+req.body.travelId);
   time_stamp = Math.max(req.body.time_stamp, time_stamp) + 1;
   requestsQueue.enq(reservation.buildReservationRequest(req,res,time_stamp));
+  processRequests();
+})
+
+// Confirm a travel
+app.post('/confirmation', function (req, res) {
+  console.log('[LOG] - Confirmation received for travel '+req.body.travelId);
+  time_stamp = Math.max(req.body.time_stamp, time_stamp) + 1;
+  requestsQueue.enq(confirmation.buildConfirmationRequest(req,res,time_stamp));
   processRequests();
 })
 
@@ -61,9 +70,12 @@ function initialize() {
 function processRequests() {
   while (requestsQueue.size()>0) {
     var request = requestsQueue.deq();
-    if (request.type == 'RESERVATION') {
+    if (request.type === 'RESERVATION') {
       // The request is a reservation.
       reservation.processReservation(travels,request);
+    }
+    if (request.type === 'CONFIRMATION') {
+      confirmation.processConfirmation(travels,request);
     }
   } 
 }

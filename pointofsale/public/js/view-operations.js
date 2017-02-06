@@ -119,7 +119,7 @@ function fillTableWithOneTravel(path) {
   buttonConfirm.style.float='right';
   buttonConfirm.travel = path;
   buttonConfirm.onclick = function(){
-    reserveTravels(this.travel);
+    confirmTravels(this.travel);
   };
 
   var buttonCancel = document.createElement('BUTTON');
