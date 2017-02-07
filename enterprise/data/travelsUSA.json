@@ -1,0 +1,36 @@
+[{
+  "originCity": "New York",
+  "destinyCity": "Los Angeles",
+  "price": 1500,
+  "places": 200,
+  "reservedPlaces": 0,
+  "id": 1
+},{
+  "originCity": "Los Angeles",
+  "destinyCity": "New York",
+  "price": 1500,
+  "places": 200,
+  "reservedPlaces": 0,
+  "id": 2
+},{
+  "originCity": "New York",
+  "destinyCity": "Washington DC",
+  "price": 1500,
+  "places": 200,
+  "reservedPlaces": 0,
+  "id": 3
+},{
+  "originCity": "New York",
+  "destinyCity": "Rio de Janeiro",
+  "price": 1500,
+  "places": 200,
+  "reservedPlaces": 0,
+  "id": 4
+},{
+  "originCity": "Rio de Janeiro",
+  "destinyCity": "New York",
+  "price": 1500,
+  "places": 200,
+  "reservedPlaces": 0,
+  "id": 5
+}]

@@ -1,4 +1,4 @@
-var enterpriseServers = ["http://localhost:8081","http://localhost:8082"];
+var enterpriseServers = ["http://localhost:8081","http://localhost:8082","http://localhost:8083"];
 
 var travels = new graphlib.Graph(); // creates a graph
 var paths = [];
