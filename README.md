@@ -48,6 +48,10 @@ Running the Enterprise Servers:
 - Run any of the servers:
 	``` 
 	node serverARGAirline.js 
-	node serverBRAARGAirline.js
+	node serverBRAAirline.js
 	node serverUSAAirline.js
 	```
+
+Documentation
+=============
+- Read the file in the doc directory.
