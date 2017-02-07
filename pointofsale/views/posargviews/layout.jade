@@ -1,0 +1,23 @@
+doctype
+html
+  head
+    title #{title} - Ticket Sales
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  style.
+    header {
+        background-color: #11C4FF;
+        border-bottom: 1px solid #000000;
+    }
+    h1 {
+      text-shadow: 0px -1px 0px #000000;
+    }
+  body
+    header
+      h1 POS ARG
+    .container
+      .main-content
+        block content
+      .sidebar
+        block sidebar
+    footer
+      p Running on node with Express, Jade and Stylus

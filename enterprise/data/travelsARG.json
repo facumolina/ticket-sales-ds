@@ -38,13 +38,13 @@
   "destinyCity": "Rosario",
   "price": 1500,
   "places": 200,
-  "reservedPlaces": 0,
+  "reservedPlaces": 200,
   "id": 6
 }, {
   "originCity": "Córdoba",
   "destinyCity": "Rosario",
   "price": 1500,
   "places": 200,
-  "reservedPlaces": 0,
+  "reservedPlaces": 200,
   "id": 7
 }]

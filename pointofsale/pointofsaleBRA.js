@@ -11,7 +11,7 @@ function compile(str, path) {
     .set('filename', path)
     .use(nib())
 }
-app.set('views', __dirname + '/views')
+app.set('views', __dirname + '/views/posbraviews')
 app.set('view engine', 'jade')
 app.use(express.logger('dev'))
 app.use(stylus.middleware(
@@ -21,11 +21,11 @@ app.use(stylus.middleware(
 ))
 app.use(express.static(__dirname + '/public'))
 
-cities = ["Río Cuarto", "Córdoba", "Buenos Aires", "Rosario", "Rio de Janeiro", "Brasilia","New York", "Los Angeles"]
+cities = ["Buenos Aires","Rio de Janeiro","Brasilia","New York"]
 
 app.get('/', function (req, res) {
   res.render('index',
-  { title : 'Home', cities: cities}
+  { title : 'POS Bra', cities: cities}
   )
 })
-app.listen(3000)
+app.listen(3001)

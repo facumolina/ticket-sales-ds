@@ -62,7 +62,7 @@ var server = app.listen(8081, function () {
  */
 function initialize() {
   // Initialize travels.
-  fs.readFile( __dirname + "/data/" + "travels.json", 'utf8', function (err, data) {
+  fs.readFile( __dirname + "/data/" + "travelsARG.json", 'utf8', function (err, data) {
     travels = JSON.parse(data);
   });
   // Initialize requests queue,
