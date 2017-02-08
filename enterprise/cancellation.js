@@ -32,12 +32,12 @@ module.exports = {
 	 	if (reserve.status === 'CONFIRMED') {
 	 		travel.reservedPlaces--;
 	 		reserve.status = 'CANCELLED';
-			console.log('[LOG] - Cancelling reservation '+ reserve.id +' for travel '+travelId+' in time_stamp '+cancellation.time_stamp+'. Total available places: '+(travel.places-travel.reservedPlaces));
+			console.log('[LOG] - Cancelling reservation '+ reserve.id +' for travel '+travelId+' from '+travel.originCity+' to '+travel.destinyCity+' in time_stamp '+cancellation.time_stamp+'. Total available places: '+(travel.places-travel.reservedPlaces));
 			
 			// Confirm the place.
 	 		cancellation.res.end("CANCELLATION_SUCCESS");
 	 	} else {
-	 		console.log('[LOG] - Cancellation '+ reserve.id +' for travel '+travelId+' in time_stamp '+cancellation.time_stamp+' can not be performed. Total available places: '+(travel.places-travel.reservedPlaces));
+	 		console.log('[LOG] - Cancellation '+ reserve.id +' for travel '+travelId+' from '+travel.originCity+' to '+travel.destinyCity+' in time_stamp '+cancellation.time_stamp+' can not be performed. Total available places: '+(travel.places-travel.reservedPlaces));
 	 		cancellation.res.end("CANCELLATION_ERROR");	
 	 	}
 	  
